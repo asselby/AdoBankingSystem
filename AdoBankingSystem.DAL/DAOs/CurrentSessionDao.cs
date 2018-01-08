@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace AdoBankingSystem.DAL.DAOs
 {
-    public class CurrentSessionDao : IDAO<CurrentSessionDto>
+    public class CurrentSessionDao : IDAO<CurrentSessionDto>, IExtendedCurrentSession
     {
         private SqlConnection sqlConnection = null;
         public string Create(CurrentSessionDto record)
@@ -40,6 +40,30 @@ namespace AdoBankingSystem.DAL.DAOs
             return record.Id;
         }
 
+        public string GetCurrentSessionIdByUserId(string userId)
+        {
+            string idToReturn = null;
+            using (SqlConnection sqlConnection = DatabaseConnectionFactory.GetConnection())
+            {
+                string baseQuery = "SELECT * FROM dbo.CurrentSessions WHERE UserId = '{0}'";
+                string realQuery = String.Format(baseQuery, userId);
+                sqlConnection.Open();
+                using (SqlCommand sqlCommand = sqlConnection.CreateCommand())
+                {
+                    sqlCommand.CommandText = realQuery;
+                    sqlCommand.CommandType = CommandType.Text;
+
+                    SqlDataReader reader = sqlCommand.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+                        idToReturn = reader["Id"].ToString();
+                    }             
+                    sqlConnection.Close();
+                }
+            }
+            return idToReturn;
+        }
         public CurrentSessionDto Read(string id)
         {
             throw new NotImplementedException();
@@ -103,5 +127,7 @@ namespace AdoBankingSystem.DAL.DAOs
         {
             throw new NotImplementedException();
         }
+
+        
     }
 }

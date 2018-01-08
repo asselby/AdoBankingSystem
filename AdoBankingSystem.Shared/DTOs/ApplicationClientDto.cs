@@ -18,6 +18,8 @@ namespace AdoBankingSystem.Shared.DTOs
         public string LastName { get; set; }
         public string Email { get; set; }
         public string PasswordHash { get; set; }
+        public ApplicationClientType ApplicationClientType { get; set; }
+
         #endregion
         public ApplicationClientDto(string firstName, string lastName, 
             string email, string passwordHash)

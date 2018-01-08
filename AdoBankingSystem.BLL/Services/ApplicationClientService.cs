@@ -78,6 +78,17 @@ namespace AdoBankingSystem.BLL.Services
             }
             return false;
         }
+
+        public bool LogOutFromApplication(string userIdToLogout)
+        {
+            string sessionId = _currentSessionsDao.GetCurrentSessionIdByUserId(userIdToLogout);
+            if (sessionId != null)
+            {
+                _currentSessionsDao.Remove(sessionId);
+                return true;
+            }
+            else return false; 
+        }
         private bool IsValidEntity(string password, string passwordConfirmation)
         {
             if (password == passwordConfirmation) return true;
