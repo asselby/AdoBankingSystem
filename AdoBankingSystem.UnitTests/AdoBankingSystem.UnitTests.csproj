@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="DALTests.cs" />
     <Compile Include="DTOs\DTOTests.cs" />
+    <Compile Include="IntegrationTests\FinanceServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ApplicationClientServiceTests.cs" />
     <Compile Include="SharedTests.cs" />

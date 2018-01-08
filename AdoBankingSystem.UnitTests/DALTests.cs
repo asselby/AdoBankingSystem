@@ -55,5 +55,25 @@ namespace AdoBankingSystem.UnitTests
                 Debug.WriteLine(item.ToString());
             }
         }
+
+        [TestMethod]
+        public void TransactionDao_Create()
+        {
+            TransactionDao transactionDao = new TransactionDao();
+            string idToSet = Guid.NewGuid().ToString();
+            string result = transactionDao.Create(new TransactionDto()
+            {
+                SenderId = "Zeus",
+                ReceiverId = "Drow Ranger",
+                TransactionAmount = 6200,
+                TransactionType = TransactionType.ClientToClientTransaction,
+                TransactionTime = DateTime.Now,
+                EntityStatus = EntityStatusType.IsActive,
+                CreatedTime = DateTime.Now,
+                Id = idToSet
+            });
+
+            Assert.IsTrue(result == idToSet);
+        }
     }
 }

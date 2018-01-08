@@ -10,10 +10,5 @@ namespace AdoBankingSystem.UnitTests
     [TestClass]
     public class SharedTests
     {
-        [TestMethod]
-        public void EntityDto_GetDetailedTypeInfo()
-        {
-            
-        }
     }
 }
